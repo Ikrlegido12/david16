@@ -322,17 +322,19 @@
         }
 
         .modal-close {
-            position: sticky;
-            top: 0.5rem;
-            float: right;
-            width: 40px;
-            height: 40px;
+            position: absolute;
+            top: -0.7rem;
+            right: -0.7rem;
+            width: 42px;
+            height: 42px;
             border: 0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.14);
+            background: #ff3b30;
             color: var(--text-primary);
             font-size: 1.3rem;
             cursor: pointer;
+            box-shadow: 0 8px 24px rgba(255, 59, 48, 0.35);
+            z-index: 2;
         }
 
         .modal-carousel {
@@ -720,15 +722,15 @@
     <section class="gallery" id="galeria">
         <h2 class="section-title">Tus mejores fotos</h2>
         <div class="gallery-grid">
-            <button class="gallery-item" type="button" data-title="Foto 1" data-text="Un recuerdo especial para empezar este día con una sonrisa." data-base="fotos/foto1"><img src="" alt="Foto 1" loading="lazy"><span class="gallery-item-label">Foto 1</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 2" data-text="Los mejores profesores que pudimos tener." data-base="fotos/foto2"><img src="" alt="Foto 2" loading="lazy"><span class="gallery-item-label">Foto 2</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 3" data-text="Despues maxeamos un poco nuestras cuentas." data-base="fotos/foto3"><img src="" alt="Foto 3" loading="lazy"><span class="gallery-item-label">Foto 3</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 4" data-text="La alegría de este día se refleja en cada detalle." data-base="fotos/foto4"><img src="" alt="Foto 4" loading="lazy"><span class="gallery-item-label">Foto 4</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 5" data-text="Una foto que resume lo bonito que es compartir." data-base="fotos/foto5"><img src="" alt="Foto 5" loading="lazy"><span class="gallery-item-label">Foto 5</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 6" data-text="Porque los mejores recuerdos siempre merecen volver a verse." data-base="fotos/foto6"><img src="" alt="Foto 6" loading="lazy"><span class="gallery-item-label">Foto 6</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 7" data-text="La magia de este cumpleaños en una sola imagen." data-base="fotos/foto7"><img src="" alt="Foto 7" loading="lazy"><span class="gallery-item-label">Foto 7</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 8" data-text="Un detalle más para hacer de este día algo memorable." data-base="fotos/foto8"><img src="" alt="Foto 8" loading="lazy"><span class="gallery-item-label">Foto 8</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 9" data-text="Y por último, un recuerdo que siempre querrás conservar." data-base="fotos/foto9"><img src="" alt="Foto 9" loading="lazy"><span class="gallery-item-label">Foto 9</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 1" data-text="Un recuerdo especial para empezar este día con una sonrisa." data-base="fotos/foto1" data-count="2"><img src="" alt="Foto 1" loading="lazy"><span class="gallery-item-label">Foto 1</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 2" data-text="Los mejores profesores que pudimos tener." data-base="fotos/foto2" data-count="2"><img src="" alt="Foto 2" loading="lazy"><span class="gallery-item-label">Foto 2</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 3" data-text="Despues maxeamos un poco nuestras cuentas." data-base="fotos/foto3" data-count="1"><img src="" alt="Foto 3" loading="lazy"><span class="gallery-item-label">Foto 3</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 4" data-text="La alegría de este día se refleja en cada detalle." data-base="fotos/foto4" data-count="1"><img src="" alt="Foto 4" loading="lazy"><span class="gallery-item-label">Foto 4</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 5" data-text="Una foto que resume lo bonito que es compartir." data-base="fotos/foto5" data-count="1"><img src="" alt="Foto 5" loading="lazy"><span class="gallery-item-label">Foto 5</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 6" data-text="Porque los mejores recuerdos siempre merecen volver a verse." data-base="fotos/foto6" data-count="1"><img src="" alt="Foto 6" loading="lazy"><span class="gallery-item-label">Foto 6</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 7" data-text="La magia de este cumpleaños en una sola imagen." data-base="fotos/foto7" data-count="1"><img src="" alt="Foto 7" loading="lazy"><span class="gallery-item-label">Foto 7</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 8" data-text="Un detalle más para hacer de este día algo memorable." data-base="fotos/foto8" data-count="1"><img src="" alt="Foto 8" loading="lazy"><span class="gallery-item-label">Foto 8</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 9" data-text="Y por último, un recuerdo que siempre querrás conservar." data-base="fotos/foto9" data-count="1"><img src="" alt="Foto 9" loading="lazy"><span class="gallery-item-label">Foto 9</span></button>
         </div>
     </section>
 
@@ -818,81 +820,91 @@
                 carouselDots.innerHTML = '';
                 previousBtn.style.display = 'none';
                 nextBtn.style.display = 'none';
+                carouselDots.style.display = 'none';
                 return;
             }
 
             modalImage.src = carouselImages[carouselIndex];
             modalImage.alt = activeItem?.dataset.title || 'Foto';
-            carouselStatus.textContent = `${carouselIndex + 1} / ${carouselImages.length}`;
+            const isCarousel = carouselImages.length > 1;
+            carouselStatus.textContent = isCarousel ? `${carouselIndex + 1} / ${carouselImages.length}` : '1 / 1';
             carouselDots.innerHTML = '';
-            carouselImages.forEach((_, dotIndex) => {
-                const dot = document.createElement('button');
-                dot.className = `carousel-dot${dotIndex === carouselIndex ? ' is-active' : ''}`;
-                dot.type = 'button';
-                dot.setAttribute('aria-label', `Ir a la foto ${dotIndex + 1}`);
-                dot.addEventListener('click', () => {
-                    carouselIndex = dotIndex;
-                    updateCarouselUi();
+            if (isCarousel) {
+                carouselImages.forEach((_, dotIndex) => {
+                    const dot = document.createElement('button');
+                    dot.className = `carousel-dot${dotIndex === carouselIndex ? ' is-active' : ''}`;
+                    dot.type = 'button';
+                    dot.setAttribute('aria-label', `Ir a la foto ${dotIndex + 1}`);
+                    dot.addEventListener('click', () => {
+                        carouselIndex = dotIndex;
+                        updateCarouselUi();
+                    });
+                    carouselDots.appendChild(dot);
                 });
-                carouselDots.appendChild(dot);
-            });
+            }
 
-            previousBtn.style.display = carouselImages.length > 1 ? 'block' : 'none';
-            nextBtn.style.display = carouselImages.length > 1 ? 'block' : 'none';
+            previousBtn.style.display = isCarousel ? 'block' : 'none';
+            nextBtn.style.display = isCarousel ? 'block' : 'none';
+            carouselDots.style.display = isCarousel ? 'flex' : 'none';
         }
 
-        function buildCandidates(base) {
+        function buildCandidates(base, count) {
             const normalized = (base || '').replace(/\.(jpg|jpeg|png|webp|gif|svg)$/i, '');
             if (!normalized) {
                 return [];
             }
 
             const candidates = [];
-            const prefixes = [normalized, `${normalized}-1`, `${normalized}-2`, `${normalized}-3`, `${normalized}-4`, `${normalized}-5`];
-            prefixes.forEach((prefix) => {
+            if (count <= 1) {
                 imageExtensions.forEach((ext) => {
-                    const candidate = `${prefix}${ext}`;
-                    if (!candidates.includes(candidate)) {
-                        candidates.push(candidate);
-                    }
+                    candidates.push(`${normalized}${ext}`);
                 });
-            });
+                return candidates;
+            }
+
+            for (let index = 1; index <= count; index += 1) {
+                const suffix = index === 1 ? '-1' : `-${index}`;
+                imageExtensions.forEach((ext) => {
+                    candidates.push(`${normalized}${suffix}${ext}`);
+                });
+            }
             return candidates;
         }
 
-        function imageExists(src) {
-            return new Promise((resolve) => {
-                const img = new Image();
-                img.onload = () => resolve(true);
-                img.onerror = () => resolve(false);
-                img.src = src;
-            });
+        async function checkImage(src) {
+            try {
+                const response = await fetch(src, { method: 'HEAD', cache: 'no-store' });
+                return response.ok;
+            } catch (error) {
+                return false;
+            }
         }
 
         async function resolveCarouselImages(item) {
-            const fallback = item.dataset.image || '';
             const base = item.dataset.base || '';
-            const candidates = buildCandidates(base || fallback);
-
-            if (fallback && !candidates.includes(fallback)) {
-                candidates.unshift(fallback);
-            }
-
+            const count = Number(item.dataset.count || 1);
+            const candidates = buildCandidates(base, count);
             const resolved = [];
+
             for (const candidate of candidates) {
-                if (await imageExists(candidate)) {
+                if (await checkImage(candidate)) {
                     resolved.push(candidate);
                 }
-                if (resolved.length >= 10) {
+                if (resolved.length >= count) {
                     break;
                 }
             }
 
-            if (!resolved.length && fallback) {
-                resolved.push(fallback);
-            }
-
             return resolved;
+        }
+
+        async function hydrateGalleryItem(item) {
+            const img = item.querySelector('img');
+            const resolved = await resolveCarouselImages(item);
+            if (resolved[0]) {
+                img.src = resolved[0];
+                img.alt = item.dataset.title || 'Foto';
+            }
         }
 
         async function openModal(item) {
@@ -922,6 +934,7 @@
                     openModal(item);
                 }
             });
+            void hydrateGalleryItem(item);
         });
 
         previousBtn.addEventListener('click', () => {
@@ -947,6 +960,12 @@
         });
 
         modalClose.addEventListener('click', closeModal);
+
+        modal.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
 
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && modal.classList.contains('is-open')) {
