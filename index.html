@@ -261,6 +261,81 @@
             transition: var(--transition-smooth);
             aspect-ratio: 1;
             will-change: transform;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            border: 0;
+        }
+
+        .gallery-item:focus-visible {
+            outline: 3px solid rgba(255, 255, 255, 0.8);
+            outline-offset: 3px;
+        }
+
+        .gallery-item-label {
+            font-size: 0.95rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 8, 20, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+
+        .modal-backdrop.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            position: relative;
+            width: min(92vw, 480px);
+            max-height: min(88vh, 560px);
+            overflow: auto;
+            background: linear-gradient(135deg, var(--primary-light), var(--card-bg));
+            border: 1px solid rgba(0, 217, 255, 0.25);
+            border-radius: 20px;
+            box-shadow: var(--shadow-medium);
+            padding: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 0.5rem;
+            float: right;
+            width: 40px;
+            height: 40px;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.14);
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-size: 1.35rem;
+            margin: 0.2rem 0 0.75rem;
+            padding-right: 3rem;
+        }
+
+        .modal-body {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.98rem;
+        }
+
+        body.modal-open {
+            overflow: hidden;
         }
 
         .gallery-item:nth-child(2) {
@@ -559,15 +634,15 @@
     <section class="gallery" id="galeria">
         <h2 class="section-title">Tus mejores fotos</h2>
         <div class="gallery-grid">
-            <div class="gallery-item">Foto 1</div>
-            <div class="gallery-item">Foto 2</div>
-            <div class="gallery-item">Foto 3</div>
-            <div class="gallery-item">Foto 4</div>
-            <div class="gallery-item">Foto 5</div>
-            <div class="gallery-item">Foto 6</div>
-            <div class="gallery-item">Foto 7</div>
-            <div class="gallery-item">Foto 8</div>
-            <div class="gallery-item">Foto 9</div>
+            <button class="gallery-item" type="button" data-title="Foto 1" data-text="Un recuerdo especial para empezar este día con una sonrisa."><span class="gallery-item-label">Foto 1</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 2" data-text="Cada instante contigo se vuelve inolvidable."><span class="gallery-item-label">Foto 2</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 3" data-text="Un momento perfecto para guardar en el corazón."><span class="gallery-item-label">Foto 3</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 4" data-text="La alegría de este día se refleja en cada detalle."><span class="gallery-item-label">Foto 4</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 5" data-text="Una foto que resume lo bonito que es compartir."><span class="gallery-item-label">Foto 5</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 6" data-text="Porque los mejores recuerdos siempre merecen volver a verse."><span class="gallery-item-label">Foto 6</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 7" data-text="La magia de este cumpleaños en una sola imagen."><span class="gallery-item-label">Foto 7</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 8" data-text="Un detalle más para hacer de este día algo memorable."><span class="gallery-item-label">Foto 8</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 9" data-text="Y por último, un recuerdo que siempre querrás conservar."><span class="gallery-item-label">Foto 9</span></button>
         </div>
     </section>
 
@@ -576,28 +651,28 @@
         <h2 class="section-title">Lo que te queremos decir</h2>
         <div class="messages-grid">
             <div class="message-card">
-                <p class="message-text">"Que este año esté lleno de risas, aventuras increíbles y momentos que recordarás para siempre. ¡Que disfrutes al máximo!"</p>
-                <p class="message-author">Tu mejor amigo</p>
+                <p class="message-text">"Las bolas a los bolos."</p>
+                <p class="message-author">Nosotros en el búnquer</p>
             </div>
             <div class="message-card">
-                <p class="message-text">"Cada año te haces más genial, más divertido y más especial. Gracias por ser el regalo que enriquece nuestras vidas."</p>
-                <p class="message-author">La pandilla</p>
+                <p class="message-text">"samba con choquifresas, eres un fresa 😋"</p>
+                <p class="message-author">Tu negro favorito</p>
             </div>
             <div class="message-card">
-                <p class="message-text">"Hoy celebramos el día en que llegaste a este mundo. ¡Qué suerte tenemos de que así haya sido! Feliz cumpleaños."</p>
-                <p class="message-author">Los colegas</p>
+                <p class="message-text">"Hoy soplas velas, mañana seguimos dándote guerra."</p>
+                <p class="message-author">Los de las malas ideas</p>
             </div>
             <div class="message-card">
-                <p class="message-text">"Que todos tus deseos se hagan realidad, que la vida te sonría cada día y que siempre encuentres razones para celebrar."</p>
-                <p class="message-author">Tu admirador secreto</p>
+                <p class="message-text">"Eres más que un amigo, eres familia. Disfruta tu día lo más que puedas."</p>
+                <p class="message-author">Tu segunda familia</p>
             </div>
             <div class="message-card">
-                <p class="message-text">"Este año promete ser el mejor de tu vida. Estamos aquí para hacer que cada momento sea extraordinario contigo."</p>
+                <p class="message-text">"Eres de esos que dejan huella sin saberlo."</p>
+                <p class="message-author">Los que siempre están</p>
+            </div>
+            <div class="message-card">
+                <p class="message-text">"Espero que hoy no hayas esnifado pegamento, que si no los guarras te van a poner una multita."</p>
                 <p class="message-author">El equipo</p>
-            </div>
-            <div class="message-card">
-                <p class="message-text">"Eres una persona increíble que trae felicidad a todos a tu alrededor. ¡Que hoy sea un reflejo de lo especial que eres!"</p>
-                <p class="message-author">Tus amigos</p>
             </div>
         </div>
     </section>
@@ -606,5 +681,59 @@
     <footer class="footer">
         <p class="footer-text">Hecho con ❤️ por tu informático favorito - Iker M.D.</p>
     </footer>
+
+    <div class="modal-backdrop" id="galleryModal" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal-close" type="button" aria-label="Cerrar modal">×</button>
+            <h3 class="modal-title" id="modalTitle">Foto</h3>
+            <p class="modal-body">Este es un recuerdo especial.</p>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('galleryModal');
+        const modalTitle = modal.querySelector('.modal-title');
+        const modalBody = modal.querySelector('.modal-body');
+        const modalClose = modal.querySelector('.modal-close');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        function openModal(item) {
+            modalTitle.textContent = item.dataset.title || 'Foto';
+            modalBody.textContent = item.dataset.text || 'Un recuerdo especial para este día.';
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+        }
+
+        galleryItems.forEach((item) => {
+            item.addEventListener('click', () => openModal(item));
+            item.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openModal(item);
+                }
+            });
+        });
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        modalClose.addEventListener('click', closeModal);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
