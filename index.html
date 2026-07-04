@@ -527,6 +527,7 @@
             margin-bottom: 1rem;
             line-height: 1.7;
             font-size: 0.95rem;
+            white-space: pre-wrap;
         }
 
         .message-author {
@@ -792,6 +793,10 @@
                 <p class="message-text">"Besis de fresis"</p>
                 <p class="message-author">El momificador</p>
             </div>
+            <div class="message-card">
+                <p class="message-text">"Feliz cumpleaños a mi gemelo de neurona. Graciad por compartir la única que nos queda.\n\nFelicidades! Eres el hermano que elegí para hacer el ridículo en público\n\nFeliz cumpleaños! Eres la mejor combinación entre un Gran Hermano y un dolor de cabeza.\n\nFeliz cumpleaños! Un año más viejo pero no más maduro\n\nTienes tus momentos malos pero siempre sabes sacar una sonrisa"</p>
+                <p class="message-author">Tu mejor amiga obsesionada con Lola Indigo</p>
+            </div>
         </div>
     </section>
 
@@ -1002,6 +1007,17 @@
                 closeModal();
             }
         });
+
+        // Process dedications/messages: convert literal "\\n" sequences into real newlines
+        (function processDedications() {
+            const messages = document.querySelectorAll('.message-text');
+            messages.forEach((el) => {
+                // Use textContent to avoid interpreting HTML
+                const raw = el.textContent || '';
+                const processed = String(raw).replace(/\\n/g, '\n');
+                el.textContent = processed;
+            });
+        })();
     </script>
 </body>
 </html>
