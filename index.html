@@ -264,6 +264,7 @@
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
             border: 0;
+            padding: 0;
         }
 
         .gallery-item:focus-visible {
@@ -271,9 +272,21 @@
             outline-offset: 3px;
         }
 
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         .gallery-item-label {
-            font-size: 0.95rem;
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 0.55rem 0.6rem;
+            font-size: 0.85rem;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.6));
+            text-align: left;
         }
 
         .modal-backdrop {
@@ -297,14 +310,14 @@
 
         .modal-card {
             position: relative;
-            width: min(92vw, 480px);
-            max-height: min(88vh, 560px);
+            width: min(92vw, 560px);
+            max-height: min(88vh, 720px);
             overflow: auto;
             background: linear-gradient(135deg, var(--primary-light), var(--card-bg));
             border: 1px solid rgba(0, 217, 255, 0.25);
             border-radius: 20px;
             box-shadow: var(--shadow-medium);
-            padding: 1.25rem;
+            padding: 1rem;
             color: var(--text-primary);
         }
 
@@ -320,6 +333,79 @@
             color: var(--text-primary);
             font-size: 1.3rem;
             cursor: pointer;
+        }
+
+        .modal-carousel {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.9rem;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 60vh;
+            object-fit: cover;
+            border-radius: 16px;
+            display: block;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(10, 12, 24, 0.7);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 1;
+            backdrop-filter: blur(6px);
+        }
+
+        .carousel-btn.prev {
+            left: 0.6rem;
+        }
+
+        .carousel-btn.next {
+            right: 0.6rem;
+        }
+
+        .carousel-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .carousel-status {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.35);
+            border: 0;
+            padding: 0;
+        }
+
+        .carousel-dot.is-active {
+            background: var(--accent-cyan);
+            transform: scale(1.2);
         }
 
         .modal-title {
@@ -634,15 +720,15 @@
     <section class="gallery" id="galeria">
         <h2 class="section-title">Tus mejores fotos</h2>
         <div class="gallery-grid">
-            <button class="gallery-item" type="button" data-title="Foto 1" data-text="Un recuerdo especial para empezar este día con una sonrisa."><span class="gallery-item-label">Foto 1</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 2" data-text="Cada instante contigo se vuelve inolvidable."><span class="gallery-item-label">Foto 2</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 3" data-text="Un momento perfecto para guardar en el corazón."><span class="gallery-item-label">Foto 3</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 4" data-text="La alegría de este día se refleja en cada detalle."><span class="gallery-item-label">Foto 4</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 5" data-text="Una foto que resume lo bonito que es compartir."><span class="gallery-item-label">Foto 5</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 6" data-text="Porque los mejores recuerdos siempre merecen volver a verse."><span class="gallery-item-label">Foto 6</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 7" data-text="La magia de este cumpleaños en una sola imagen."><span class="gallery-item-label">Foto 7</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 8" data-text="Un detalle más para hacer de este día algo memorable."><span class="gallery-item-label">Foto 8</span></button>
-            <button class="gallery-item" type="button" data-title="Foto 9" data-text="Y por último, un recuerdo que siempre querrás conservar."><span class="gallery-item-label">Foto 9</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 1" data-text="Un recuerdo especial para empezar este día con una sonrisa." data-base="fotos/foto1"><img src="" alt="Foto 1" loading="lazy"><span class="gallery-item-label">Foto 1</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 2" data-text="Los mejores profesores que pudimos tener." data-base="fotos/foto2"><img src="" alt="Foto 2" loading="lazy"><span class="gallery-item-label">Foto 2</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 3" data-text="Despues maxeamos un poco nuestras cuentas." data-base="fotos/foto3"><img src="" alt="Foto 3" loading="lazy"><span class="gallery-item-label">Foto 3</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 4" data-text="La alegría de este día se refleja en cada detalle." data-base="fotos/foto4"><img src="" alt="Foto 4" loading="lazy"><span class="gallery-item-label">Foto 4</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 5" data-text="Una foto que resume lo bonito que es compartir." data-base="fotos/foto5"><img src="" alt="Foto 5" loading="lazy"><span class="gallery-item-label">Foto 5</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 6" data-text="Porque los mejores recuerdos siempre merecen volver a verse." data-base="fotos/foto6"><img src="" alt="Foto 6" loading="lazy"><span class="gallery-item-label">Foto 6</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 7" data-text="La magia de este cumpleaños en una sola imagen." data-base="fotos/foto7"><img src="" alt="Foto 7" loading="lazy"><span class="gallery-item-label">Foto 7</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 8" data-text="Un detalle más para hacer de este día algo memorable." data-base="fotos/foto8"><img src="" alt="Foto 8" loading="lazy"><span class="gallery-item-label">Foto 8</span></button>
+            <button class="gallery-item" type="button" data-title="Foto 9" data-text="Y por último, un recuerdo que siempre querrás conservar." data-base="fotos/foto9"><img src="" alt="Foto 9" loading="lazy"><span class="gallery-item-label">Foto 9</span></button>
         </div>
     </section>
 
@@ -674,6 +760,10 @@
                 <p class="message-text">"Espero que hoy no hayas esnifado pegamento, que si no los guarras te van a poner una multita."</p>
                 <p class="message-author">El equipo</p>
             </div>
+            <div class="message-card">
+                <p class="message-text">"Besis de fresis"</p>
+                <p class="message-author">El momificador</p>
+            </div>
         </div>
     </section>
 
@@ -685,6 +775,15 @@
     <div class="modal-backdrop" id="galleryModal" aria-hidden="true">
         <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
             <button class="modal-close" type="button" aria-label="Cerrar modal">×</button>
+            <div class="modal-carousel">
+                <button class="carousel-btn prev" type="button" aria-label="Foto anterior">‹</button>
+                <img class="modal-image" src="" alt="Foto ampliada">
+                <button class="carousel-btn next" type="button" aria-label="Foto siguiente">›</button>
+            </div>
+            <div class="carousel-meta">
+                <div class="carousel-status">0 / 0</div>
+                <div class="carousel-dots" aria-label="Indicadores de fotos"></div>
+            </div>
             <h3 class="modal-title" id="modalTitle">Foto</h3>
             <p class="modal-body">Este es un recuerdo especial.</p>
         </div>
@@ -692,23 +791,127 @@
 
     <script>
         const modal = document.getElementById('galleryModal');
+        const modalImage = modal.querySelector('.modal-image');
         const modalTitle = modal.querySelector('.modal-title');
         const modalBody = modal.querySelector('.modal-body');
         const modalClose = modal.querySelector('.modal-close');
+        const previousBtn = modal.querySelector('.carousel-btn.prev');
+        const nextBtn = modal.querySelector('.carousel-btn.next');
+        const carouselStatus = modal.querySelector('.carousel-status');
+        const carouselDots = modal.querySelector('.carousel-dots');
         const galleryItems = document.querySelectorAll('.gallery-item');
-
-        function openModal(item) {
-            modalTitle.textContent = item.dataset.title || 'Foto';
-            modalBody.textContent = item.dataset.text || 'Un recuerdo especial para este día.';
-            modal.classList.add('is-open');
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('modal-open');
-        }
+        const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'];
+        let carouselImages = [];
+        let carouselIndex = 0;
+        let activeItem = null;
 
         function closeModal() {
             modal.classList.remove('is-open');
             modal.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('modal-open');
+        }
+
+        function updateCarouselUi() {
+            if (!carouselImages.length) {
+                modalImage.src = '';
+                carouselStatus.textContent = '0 / 0';
+                carouselDots.innerHTML = '';
+                previousBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                return;
+            }
+
+            modalImage.src = carouselImages[carouselIndex];
+            modalImage.alt = activeItem?.dataset.title || 'Foto';
+            carouselStatus.textContent = `${carouselIndex + 1} / ${carouselImages.length}`;
+            carouselDots.innerHTML = '';
+            carouselImages.forEach((_, dotIndex) => {
+                const dot = document.createElement('button');
+                dot.className = `carousel-dot${dotIndex === carouselIndex ? ' is-active' : ''}`;
+                dot.type = 'button';
+                dot.setAttribute('aria-label', `Ir a la foto ${dotIndex + 1}`);
+                dot.addEventListener('click', () => {
+                    carouselIndex = dotIndex;
+                    updateCarouselUi();
+                });
+                carouselDots.appendChild(dot);
+            });
+
+            previousBtn.style.display = carouselImages.length > 1 ? 'block' : 'none';
+            nextBtn.style.display = carouselImages.length > 1 ? 'block' : 'none';
+        }
+
+        function buildCandidates(base) {
+            const normalized = (base || '').replace(/\.(jpg|jpeg|png|webp|gif|svg)$/i, '');
+            if (!normalized) {
+                return [];
+            }
+
+            const candidates = [];
+            const prefixes = [normalized, `${normalized}-1`, `${normalized}-2`, `${normalized}-3`, `${normalized}-4`, `${normalized}-5`];
+            prefixes.forEach((prefix) => {
+                imageExtensions.forEach((ext) => {
+                    const candidate = `${prefix}${ext}`;
+                    if (!candidates.includes(candidate)) {
+                        candidates.push(candidate);
+                    }
+                });
+            });
+            return candidates;
+        }
+
+        function imageExists(src) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve(true);
+                img.onerror = () => resolve(false);
+                img.src = src;
+            });
+        }
+
+        async function resolveCarouselImages(item) {
+            const fallback = item.dataset.image || '';
+            const base = item.dataset.base || '';
+            const candidates = buildCandidates(base || fallback);
+
+            if (fallback && !candidates.includes(fallback)) {
+                candidates.unshift(fallback);
+            }
+
+            const resolved = [];
+            for (const candidate of candidates) {
+                if (await imageExists(candidate)) {
+                    resolved.push(candidate);
+                }
+                if (resolved.length >= 10) {
+                    break;
+                }
+            }
+
+            if (!resolved.length && fallback) {
+                resolved.push(fallback);
+            }
+
+            return resolved;
+        }
+
+        async function openModal(item) {
+            activeItem = item;
+            modalTitle.textContent = item.dataset.title || 'Foto';
+            modalBody.textContent = item.dataset.text || 'Un recuerdo especial para este día.';
+            carouselImages = [];
+            carouselIndex = 0;
+            updateCarouselUi();
+
+            carouselImages = await resolveCarouselImages(item);
+            if (carouselImages.length) {
+                carouselIndex = 0;
+            }
+            updateCarouselUi();
+
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
         }
 
         galleryItems.forEach((item) => {
@@ -719,6 +922,22 @@
                     openModal(item);
                 }
             });
+        });
+
+        previousBtn.addEventListener('click', () => {
+            if (!carouselImages.length) {
+                return;
+            }
+            carouselIndex = (carouselIndex - 1 + carouselImages.length) % carouselImages.length;
+            updateCarouselUi();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (!carouselImages.length) {
+                return;
+            }
+            carouselIndex = (carouselIndex + 1) % carouselImages.length;
+            updateCarouselUi();
         });
 
         modal.addEventListener('click', (event) => {
