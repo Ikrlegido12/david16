@@ -96,7 +96,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, rgba(26,26,46,0.85) 55%, var(--primary-light) 100%);
+            background: linear-gradient(135deg, #060611 0%, #1b0f3f 30%, #ff4d6d 65%, #ffb347 100%);
             position: relative;
             overflow: hidden;
             padding: 2rem;
@@ -144,18 +144,36 @@
             z-index: 1;
             text-align: center;
             max-width: 90vw;
+            padding: 2rem 2.5rem;
+            border-radius: 1.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .hero-name {
+            display: block;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 800;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
 
         .hero-title {
             font-size: clamp(2.5rem, 10vw, 5rem);
             font-weight: 900;
             margin-bottom: 1.5rem;
-            background: linear-gradient(120deg, var(--accent-cyan), var(--accent-magenta), var(--accent-gold));
+            background: linear-gradient(120deg, #fff7d6 0%, #ffd166 45%, #ff7f50 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -2px;
             line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
         }
 
         @media (prefers-reduced-motion: no-preference) {
@@ -737,6 +755,7 @@
     <!-- Hero Section - Feliz Cumple -->
     <section class="hero" id="inicio">
         <div class="hero-content">
+            <span class="hero-name">David</span>
             <h1 class="hero-title">¡Feliz Cumpleaños!</h1>
             <p class="hero-subtitle">Desliza hacia abajo para ver tu sorpresa</p>
         </div>
