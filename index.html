@@ -497,52 +497,74 @@
         /* Messages Section */
         .messages {
             padding: 3.5rem 1.5rem;
-            background-color: var(--primary-light);
+            background: linear-gradient(135deg, rgba(15, 15, 30, 0.98), rgba(26, 26, 46, 0.96));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .messages::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(0, 217, 255, 0.14), transparent 35%),
+                        radial-gradient(circle at bottom right, rgba(255, 0, 110, 0.14), transparent 35%);
+            pointer-events: none;
         }
 
         .messages-grid {
-            max-width: 1000px;
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .message-card {
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-medium);
+            padding: 1.2rem 1.25rem;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
             transition: var(--transition-smooth);
-            border-left: 4px solid var(--accent-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
             will-change: transform;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-magenta));
         }
 
         .message-card:nth-child(odd) {
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.15), rgba(139, 92, 246, 0.15));
-            border-left-color: var(--accent-cyan);
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.16), rgba(26, 26, 46, 0.95));
         }
 
         .message-card:nth-child(even) {
-            background: linear-gradient(135deg, rgba(255, 0, 110, 0.15), rgba(255, 190, 11, 0.15));
-            border-left-color: var(--accent-magenta);
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.16), rgba(26, 26, 46, 0.95));
         }
 
         .message-card:active {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 48px rgba(0, 217, 255, 0.2);
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
         }
 
         @media (hover: hover) {
             .message-card:hover {
-                transform: translateY(-8px);
-                box-shadow: 0 16px 48px rgba(0, 217, 255, 0.2);
+                transform: translateY(-6px);
+                box-shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
             }
         }
 
         .message-text {
             font-style: italic;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.95rem;
             line-height: 1.7;
             font-size: 0.95rem;
             white-space: pre-wrap;
@@ -550,8 +572,36 @@
 
         .message-author {
             font-weight: 700;
-            color: var(--text-primary);
-            font-size: 1rem;
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+        }
+
+        @media (min-width: 700px) {
+            .messages-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .messages {
+                padding: 2.5rem 1rem;
+            }
+
+            .message-card {
+                padding: 1rem;
+                border-radius: 14px;
+            }
+
+            .message-text {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .message-author {
+                font-size: 0.9rem;
+            }
         }
 
         /* Footer */
@@ -749,6 +799,7 @@
             <a href="#inicio" class="nav-link">Inicio</a>
             <a href="#galeria" class="nav-link">Momentazos</a>
             <a href="#mensajes" class="nav-link">Dedicatorias</a>
+            <a href="#mensajes-amigos" class="nav-link">Mensajes</a>
         </div>
     </nav>
 
@@ -782,7 +833,7 @@
 
     <!-- Messages Section -->
     <section class="messages" id="mensajes">
-        <h2 class="section-title">Lo que te queremos decir</h2>
+        <h2 class="section-title">Enterate bien de...</h2>
         <div class="messages-grid">
             <div class="message-card">
                 <p class="message-text">"Las bolas a los bolos."</p>
@@ -815,6 +866,30 @@
             <div class="message-card">
                 <p class="message-text">"Feliz cumpleaños a mi gemelo de neurona. Graciad por compartir la única que nos queda.\n\nFelicidades! Eres el hermano que elegí para hacer el ridículo en público\n\nFeliz cumpleaños! Eres la mejor combinación entre un Gran Hermano y un dolor de cabeza.\n\nFeliz cumpleaños! Un año más viejo pero no más maduro\n\nTienes tus momentos malos pero siempre sabes sacar una sonrisa"</p>
                 <p class="message-author">Tu mejor amiga obsesionada con Lola Indigo</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Messages Section -->
+    <section class="messages" id="mensajes-amigos">
+        <h2 class="section-title">Lo que te queremos decir</h2>
+        <p class="hero-subtitle" style="text-align:center; max-width:700px; margin:0 auto 2rem;">Aquí tus amigos te hemos dejado mensajes especiales para celebrar tu día.</p>
+        <div class="messages-grid">
+            <div class="message-card">
+                <p class="message-text">Un año menos para jubilarte.</p>
+                <p class="message-author">— Ecoinformatico</p>
+            </div>
+            <div class="message-card">
+                <p class="message-text">Un año menos para pagar impuestos.</p>
+                <p class="message-author">— Hugo</p>
+            </div>
+            <div class="message-card">
+                <p class="message-text">Un año menos para ir a la carcel.</p>
+                <p class="message-author">— Piroboinas</p>
+            </div>
+            <div class="message-card">
+                <p class="message-text">Un año menos para ir de put4s.</p>
+                <p class="message-author">— SurFer</p>
             </div>
         </div>
     </section>
